@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#1A0E06"/>
+  <!-- Outer diamond frame (teal, matches asset style) -->
+  <polygon points="256,40 472,256 256,472 40,256"
+           fill="none" stroke="#47828F" stroke-width="18" stroke-linejoin="round"/>
+  <!-- Inner diamond frame -->
+  <polygon points="256,90 422,256 256,422 90,256"
+           fill="none" stroke="#47828F" stroke-width="8" opacity="0.5"/>
+  <!-- Gold "CA" monogram -->
+  <text x="256" y="300" text-anchor="middle" font-family="Georgia,serif"
+        font-size="160" font-weight="700" fill="#C4935A" letter-spacing="-8">CA</text>
+</svg>

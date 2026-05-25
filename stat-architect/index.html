@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stat Architect — Arden</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       STARTUP SCREEN
+  ════════════════════════════════════════════════════════ -->
+  <div id="startup-screen">
+    <div class="startup-logo">Designed For Arden</div>
+    <div class="startup-title">Stat Architect</div>
+    <div class="startup-subtitle">Character Planner</div>
+    <div class="startup-divider"></div>
+    <input
+      type="text"
+      id="char-name-input"
+      placeholder="Enter Character Name..."
+      maxlength="32"
+      autocomplete="off"
+      spellcheck="false"
+    >
+    <button id="start-btn">Begin Planning</button>
+    <div id="startup-saves" style="display:none">
+      <div class="startup-saves-divider">— or resume a saved build —</div>
+      <div id="startup-saves-list"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       MAIN APPLICATION
+  ════════════════════════════════════════════════════════ -->
+  <div id="main-screen">
+
+    <!-- Top Header -->
+    <div id="app-header">
+      <a href="../index.html" class="hub-link" title="Back to Tool Suite">↩ HUB</a>
+      <span id="char-name-display">Character</span>
+
+      <div class="spec-row">
+        <span class="spec-label">Combat Spec</span>
+        <div id="spec-btn-row" style="display:flex;gap:5px;"></div>
+      </div>
+
+      <div class="header-caps">
+        <div class="cap-item">
+          <span class="cap-label">Crafting</span>
+          <span class="cap-value" id="header-crafting">0 / 1600</span>
+        </div>
+        <div class="cap-item">
+          <span class="cap-label">Combat</span>
+          <span class="cap-value" id="header-combat">0 / 400</span>
+        </div>
+        <div class="cap-item">
+          <span class="cap-label">Minor</span>
+          <span class="cap-value" id="header-minor">0 / 800</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body: Skill Panel (full width) -->
+    <div id="app-body">
+
+      <div id="skill-panel">
+        <div class="tab-bar" id="skill-tab-bar"></div>
+
+        <!-- Crafting Pane -->
+        <div class="tab-content tab-pane" data-pane="crafting" id="pane-crafting"></div>
+
+        <!-- Combat Pane -->
+        <div class="tab-content tab-pane hidden" data-pane="combat" id="pane-combat"></div>
+
+        <!-- Minor Pane -->
+        <div class="tab-content tab-pane hidden" data-pane="minor" id="pane-minor"></div>
+
+        <!-- Attributes Pane -->
+        <div class="tab-content tab-pane hidden" data-pane="attributes" id="pane-attributes"></div>
+      </div>
+
+    </div><!-- /app-body -->
+
+    <!-- Bottom Save Bar -->
+    <div id="save-bar">
+      <div class="save-bar-left">
+        <input type="text" id="save-name-input" class="save-name-input" placeholder="Name this build..." maxlength="40" autocomplete="off" spellcheck="false">
+        <button id="save-now-btn" class="save-now-btn">💾 SAVE</button>
+      </div>
+      <div id="save-slots" class="save-slots"></div>
+    </div>
+
+    <!-- Bottom Status Bar -->
+    <div id="status-bar">
+      <div class="status-item">
+        <span class="status-label">Crafting</span>
+        <span class="status-value" id="stat-crafting">0 / 1600</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label" id="stat-spec-label">Combat (Spec 1)</span>
+        <span class="status-value" id="stat-combat">0 / 400</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Minor</span>
+        <span class="status-value" id="stat-minor">0 / 800</span>
+      </div>
+      <span class="status-hint">Left click +30 &nbsp;·&nbsp; Right click −30 &nbsp;·&nbsp; Scroll ±1</span>
+    </div>
+
+  </div><!-- /main-screen -->
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

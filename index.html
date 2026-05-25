@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arden Tool Suite</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080808;
+      color: #cccccc;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Header ── */
+    .hub-header {
+      text-align: center;
+      padding: 64px 24px 36px;
+    }
+
+    .hub-game-label {
+      font-size: 11px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #7a5a10;
+      margin-bottom: 14px;
+    }
+
+    .hub-title {
+      font-size: 38px;
+      font-weight: 700;
+      color: #d4af37;
+      letter-spacing: 2px;
+      text-shadow: 0 0 30px rgba(212,175,55,0.35), 0 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .hub-subtitle {
+      font-size: 13px;
+      color: #555;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .hub-divider {
+      width: 320px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #7a5a10, transparent);
+      margin: 28px auto 0;
+    }
+
+    /* ── Tool Grid ── */
+    .tool-grid {
+      display: flex;
+      gap: 22px;
+      padding: 48px 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 780px;
+    }
+
+    .tool-card {
+      width: 320px;
+      background: #131313;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 30px 28px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top left, rgba(61,42,0,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .tool-card:hover {
+      border-color: #d4af37;
+      box-shadow: 0 0 24px rgba(212,175,55,0.12), 0 4px 20px rgba(0,0,0,0.6);
+      transform: translateY(-2px);
+    }
+
+    .tool-icon {
+      font-size: 30px;
+      margin-bottom: 16px;
+      display: block;
+      filter: drop-shadow(0 0 6px rgba(212,175,55,0.3));
+    }
+
+    .tool-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #d4af37;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .tool-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6db56d;
+      border: 1px solid #3a6b3a;
+      border-radius: 2px;
+      padding: 2px 7px;
+      margin-bottom: 16px;
+    }
+
+    .tool-badge.wip {
+      color: #e8a84a;
+      border-color: #6b4a1a;
+    }
+
+    .tool-desc {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+
+    .tool-features {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .tool-features li {
+      font-size: 11px;
+      color: #555;
+      padding: 3px 0;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .tool-features li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      font-size: 6px;
+      top: 5px;
+      color: #4a3800;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: linear-gradient(180deg, #3a2800 0%, #261a00 100%);
+      border: 1px solid #7a5a10;
+      border-radius: 3px;
+      color: #d4af37;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.15s;
+      cursor: pointer;
+    }
+
+    .tool-link:hover {
+      background: linear-gradient(180deg, #4e3800 0%, #362500 100%);
+      border-color: #d4af37;
+      box-shadow: 0 0 14px rgba(212,175,55,0.2);
+      color: #f0cc50;
+    }
+
+    .tool-link-arrow { font-size: 13px; }
+
+    /* ── Separator ── */
+    .hub-section-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #333;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ── Game Link ── */
+    .hub-game-link {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #4a3800;
+      text-decoration: none;
+      padding: 5px 14px;
+      border: 1px solid #1e1400;
+      border-radius: 3px;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+    .hub-game-link:hover {
+      color: #d4af37;
+      border-color: #7a5a10;
+      background: rgba(61,42,0,0.2);
+    }
+
+    /* ── Footer ── */
+    .hub-footer {
+      margin-top: auto;
+      padding: 32px 24px;
+      font-size: 10px;
+      color: #272727;
+      letter-spacing: 2px;
+      text-align: center;
+      text-transform: uppercase;
+      border-top: 1px solid #111;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hub-header">
+    <div class="hub-game-label">Designed For Arden</div>
+    <h1 class="hub-title">Tool Suite</h1>
+    <div class="hub-subtitle">Community Planners</div>
+    <div class="hub-divider"></div>
+    <a class="hub-game-link" href="https://global-eu2.lifmmo.com/account/dashboard.php" target="_blank" rel="noopener">↗ Game Dashboard</a>
+  </div>
+
+  <div class="hub-section-label">Select a Tool</div>
+
+  <div class="tool-grid">
+
+    <!-- Stat Architect -->
+    <div class="tool-card">
+      <span class="tool-icon">⚔</span>
+      <div class="tool-name">Stat Architect</div>
+      <div class="tool-badge">v1.3 · Live</div>
+      <div class="tool-desc">
+        Plan your character's skill build before you commit. See exactly what you unlock at each level, how long it takes to grind, and how your attributes shape your stats.
+      </div>
+      <ul class="tool-features">
+        <li>Full skill tree — 55 skills across Crafting, Combat &amp; Minor</li>
+        <li>Cascade-aware leveling with auto-parent resolution</li>
+        <li>XP grind time estimates from game data</li>
+        <li>5 independent Combat loadout specs</li>
+        <li>Attribute stat calculator (Arden-verified formulas)</li>
+        <li>Preset build templates</li>
+        <li>Save &amp; resume builds in your browser</li>
+      </ul>
+      <a class="tool-link" href="stat-architect/index.html">
+        Open Planner <span class="tool-link-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Claim Architect -->
+    <div class="tool-card">
+      <span class="tool-icon">🏰</span>
+      <div class="tool-name">Claim Architect</div>
+      <div class="tool-badge wip">Beta · In Development</div>
+      <div class="tool-desc">
+        Design and optimize your settlement layout. Place buildings on a tile grid, paint terrain, and get an instant Bill of Materials before you break ground in-game.
+      </div>
+      <ul class="tool-features">
+        <li>Full tile-grid claim planner</li>
+        <li>200+ buildings across 9 categories</li>
+        <li>Terrain painting — 17 terrain types</li>
+        <li>Live Bill of Materials with resource totals</li>
+        <li>Export &amp; import layouts as JSON</li>
+        <li>Auto-save — your layout persists in the browser</li>
+      </ul>
+      <a class="tool-link" href="claim-architect/index.html">
+        Open Planner <span class="tool-link-arrow">→</span>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="hub-footer">
+    Unofficial Community Tools &nbsp;·&nbsp; Designed For Arden &nbsp;·&nbsp; Not affiliated with Bitbox Ltd.
+  </div>
+
+</body>
+</html>
